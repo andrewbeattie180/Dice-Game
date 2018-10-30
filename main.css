@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
+
+*{
+    font-family: 'Permanent Marker', cursive;
+    text-align: center;
+}
+.wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+h1{
+    font-size: 3.5em;
+    margin-bottom: 0;
+}
+p{
+    font-size: 2em;
+    margin: 0;
+}
+
+.player{
+    font-size: 4em;
+    border: solid 5px #000;
+    border-radius: 10px;
+}
+.playerscore{
+    font-size: 0.5em;
+}
+.score{
+    font-size: 3em;
+}
+.header{
+    width:100%;
+}
+.player, .DiceGame{
+    width:30%;
+    height:70vh;
+}
+
+.DiceGame{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#dice{
+    transform:translateY(-20%);
+    font-size: 350px;
+    width:90%;
+}
+.buttons{
+    display:flex;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-content: flex-start;
+    transform:translateY(-30%);
+}
+button{
+    font-size: 2em;
+    height:15%;
+    margin:5px;
+    min-width:45%;
+    border: solid 4px #000;
+    border-radius: 10px;
+}
+button:hover{
+    cursor: pointer;
+}
+.restart, .hold{
+    display:none;
+}
+.replay{
+    height:20%;
+}
+
+.endgame{
+    display:none;
+    width:90%;
+    height:80%;
+    background:#fff;
+    position: absolute;
+    left:50%;
+    transform:translate(-50%,-47.5%);
+    top:50%;
+    padding-top:50px;
+    padding-bottom:50px;
+    border: solid 4px #000;
+    border-radius: 10px;
+    font-size:2em;
+}
+.text{
+    font-size:2.5em;
+}
+
+.diceroll{
+    display: block;
+}
+
+.highlight{
+    color:#fff;
+    background: #000;
+}
+
+
+@media only screen and (max-width:925px){
+    .diceroll,.restart,.hold{
+        width:100%;
+        font-size:1.5em;
+    }
+    .buttons{
+        transform:translateY(-50%);
+    }
+    .player{
+        font-size: 2em;
+    }
+    .score{
+        font-size: 5em;
+    }
+    #dice{
+        transform: translateY(-35%);
+    }
+    
+}
+
+@media only screen and (max-width:780px){
+    #dice{
+        font-size: 13em;
+    }
+    .buttons{
+        transform:translateY(-20%);
+    }
+}
+
+@media only screen and (max-width:600px){
+    .score{
+        font-size:3em;
+    }
+    .player{
+        height:250px;
+    }
+}
