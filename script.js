@@ -5,6 +5,8 @@ let player1DIV = document.querySelector('.Player1'); //These two divs are select
 let player2DIV = document.querySelector('.Player2'); //when players are 'selected'
 let player1Score = document.querySelector(".player1score"); //Allows text to be input as score
 let player2Score = document.querySelector(".player2score"); //Same for player 2
+let totalP1Score = document.querySelector(".totalscorep1");//Allows total score input
+let totalP2Score = document.querySelector(".totalscorep2");
 let dicegame = document.querySelector('.diceroll'); //Button that rolls the dice
 let restart = document.querySelector('.restart'); //Button that restarts the game
 let replay = document.querySelector('.replay'); //Button that restarts the game after a win
@@ -15,22 +17,29 @@ let currentPlayer = 0; //Current player is either assigned 0 (for p1) or 1 (for 
 let score = 0; //score from the dice roll
 let ongoingP1 = 0; //initial score for P1
 let ongoingP2 = 0; //initial score for P2
+let totalP1 = 0; //initial total score for P1;
+let totalP2 = 0; //initial total score for P2;
 
 
 player1Score.innerHTML = score; //Sets the text to display as zero
 player2Score.innerHTML = score; //for both players
-
+totalP1Score.innerHTML = score;
+totalP2Score.innerHTML = score;
 
 
 function initialiseGame(){ //resets the game to the initial set up
     currentPlayer = 0;
     ongoingP1 =0;
     ongoingP2 =0;
+    totalP1=0;
+    totalP2=0;
     score = 0;
     player1DIV.classList.remove('highlight'); //removes highlight class from the divs if previous game played
     player2DIV.classList.remove('highlight'); //removes highlight
     player1Score.innerHTML = score; //resets text to zero
     player2Score.innerHTML = score;
+    totalP1Score.innerHTML = score;
+    totalP2Score.innerHTML = score;
     endgame.style.display = 'none'; //hides div of the endgame
     restart.style.display = 'none'; //hides the new game button
     hold.style.display = 'none'; //hides the change player button
@@ -60,34 +69,56 @@ function diceRoll(){ //function that "rolls the dice"
 
     let text = document.querySelector('.text');
 
-    //If statement to determine endgame
+    //If statement to change player if a 1 is rolled;
 
-    if (score == 1){ //If a 1 has been rolled
-        if (currentPlayer === 0){ //If it is P1
-            endgame.style.display = 'block'; //Makes the endgame div appear
-            text.innerHTML = "PLAYER 1 <br> YOU LOSE"; 
-            score=0;}
-        else if (currentPlayer === 1){
-            endgame.style.display = 'block';
-            text.innerHTML = "PLAYER 2 <br> YOU LOSE";
-            score=0;} 
-    } else if (ongoingP1 >= 30){ //If a player has achieved the target score
+    if (currentPlayer === 0 && score ==1){ //If it is P1
+            currentPlayer = 1;
+            score=0;
+            ongoingP1 = score;
+            player1Score.innerHTML = ongoingP1;
+            player2DIV.classList.add('highlight');
+            player1DIV.classList.remove('highlight');
+        }
+    else if (currentPlayer === 1 && score ==1){
+            currentPlayer = 0;
+            score=0;
+            ongoingP2 = score;
+            player2Score.innerHTML = ongoingP2;
+            player1DIV.classList.add('highlight');
+            player2DIV.classList.remove('highlight');
+        }
+
+    if (totalP1 >= 30||ongoingP1 >=30||totalP1+ongoingP1>=30){ //If a player has achieved the target score
         endgame.style.display = 'block';
-        text.innerHTML = "WINNER" + "<br>" + "Player 1" + '<br>' + `Score:${ongoingP1}`;
-    } else if (ongoingP2 >= 30){
+        if (ongoingP1 >=30||totalP1+ongoingP1>=30){
+            totalP1 = totalP1 + ongoingP1;
+        }
+        text.innerHTML = "WINNER" + "<br>" + "Player 1" + '<br>' + `Score:${totalP1}`;
+    } else if (totalP2 >= 30||ongoingP2 >=30||totalP2+ongoingP2>=30){
         endgame.style.display = 'block';
-        text.innerHTML = "WINNER" + "<br>" + "Player 2" + '<br>' + `Score:${ongoingP2}`;
-}
+        if(ongoingP2>=30||totalP2+ongoingP2>=30){
+            totalP2 = totalP2 + ongoingP2;
+        }
+        text.innerHTML = "WINNER" + "<br>" + "Player 2" + '<br>' + `Score:${totalP2}`;
+    }
 };
 
 function changePlayer(){ //simple function that changes the currentPlayer to the inactive player
     if (currentPlayer === 0){
         currentPlayer = 1;
+        totalP1 = totalP1+ongoingP1;
+        totalP1Score.innerHTML = totalP1;
+        ongoingP1 =0;
+        player1Score.innerHTML = ongoingP1;
         player2DIV.classList.add('highlight');
         player1DIV.classList.remove('highlight');
 
     } else if(currentPlayer === 1){
         currentPlayer = 0;
+        totalP2 = totalP2+ongoingP2;
+        totalP2Score.innerHTML = totalP2;
+        ongoingP2 = 0;
+        player2Score.innerHTML=ongoingP2;
         player1DIV.classList.add('highlight');
         player2DIV.classList.remove('highlight');
     }

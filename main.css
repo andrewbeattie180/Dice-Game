@@ -28,7 +28,7 @@ p{
     font-size: 0.5em;
 }
 .score{
-    font-size: 3em;
+    font-size: 2em;
 }
 .header{
     width:100%;
@@ -80,7 +80,7 @@ button:hover{
     display:none;
     width:90%;
     height:80%;
-    background:#fff;
+    background:rgba(255,255,255, 0.95);
     position: absolute;
     left:50%;
     transform:translate(-50%,-47.5%);
